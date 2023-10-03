@@ -152,109 +152,110 @@ preloader
 /*--------------------------------------------------------------
   # Header
   --------------------------------------------------------------*/
-#header {
-  background: rgb(255 255 255);
-  border-bottom: 1px solid #db3624;
-  transition: all 0.5s;
-  z-index: 997;
-  padding: 15px 0;
-  top: 40px;
-}
-
-@media (max-width: 992px) {
   #header {
     background: rgb(255 255 255);
     border-bottom: 1px solid #db3624;
     transition: all 0.5s;
     z-index: 997;
-    padding: 10px 0;
+    padding: 15px 0;
     top: 40px;
   }
-}
-
-/* #sub-brands>header{
+  
+  @media (max-width: 992px) {
+    #header {
+      background: rgb(255 255 255);
+      border-bottom: 1px solid #db3624;
+      transition: all 0.5s;
+      z-index: 997;
+      padding: 10px 0;
+      top: 40px;
+    }
+  }
+  
+  /* #sub-brands>header{
+      position: relative;
+      top: 110px;
+    } */
+  
+  #navbar>#sb {
     position: relative;
-    top: 110px;
-  } */
-
-#navbar>#sb {
-  position: relative;
-}
-
-#header.header-scrolled {
-  top: 0;
-  background: rgb(255 255 255);
-  border-bottom: 1px solid #db3624;
-}
-
-#header .logo {
-  font-size: 28px;
-  margin: 0;
-  padding: 0;
-  line-height: 1;
-  font-weight: 300;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-family: "Poppins", sans-serif;
-}
-
-#header .logo a {
-  color: #fff;
-}
-
-#header .logo img {
-  max-height: 95px;
-  height: 201px;
-  position: absolute;
-  top: -11px;
-  left: 92px;
-}
-
-/* Media query for small screens (example: screens up to 576px wide) */
-@media screen and (max-width: 576px) {
-  #header .logo img {
-    max-height: 80px;
-    /* Adjust for smaller screens */
-    top: -10px;
-    /* Adjust for smaller screens */
-    left: 10px;
-    /* Adjust for smaller screens */
   }
-}
-
-/* Media query for medium screens (example: screens between 577px and 992px wide) */
-@media screen and (min-width: 577px) and (max-width: 992px) {
-  #header .logo img {
-    max-height: 80px;
-    /* Adjust for medium screens */
-    top: -10px;
-    /* Adjust for medium screens */
-    left: 20px;
-    /* Adjust for medium screens */
+  
+  #header.header-scrolled {
+    top: 0;
+    background: rgb(255 255 255);
+    border-bottom: 1px solid #db3624;
   }
-}
-
-/* Media query for large screens (example: screens between 993px and 1200px wide) */
-@media screen and (min-width: 993px) and (max-width: 1200px) {
-  #header .logo img {
-    max-height: 91px;
-    /* Adjust for large screens */
-    top: -10px;
-    /* Adjust for large screens */
-    left: 30px;
-    /* Adjust for large screens */
+  
+  #header .logo {
+    font-size: 28px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
   }
-}
-
-/* Media query for extra-large screens (example: screens wider than 1200px) */
-@media screen and (min-width: 1201px) {
+  
+  #header .logo a {
+    color: #fff;
+  }
+  
   #header .logo img {
+    max-height: 95px;
     height: 201px;
-    /* Your original styles for extra-large screens */
-    left: 100px;
-    /* Your original styles for extra-large screens */
+    position: absolute;
+    top: -11px;
+    left: 92px;
   }
-}
+  
+  /* Media query for small screens (example: screens up to 576px wide) */
+  @media screen and (max-width: 576px) {
+    #header .logo img {
+      max-height: 80px;
+      /* Adjust for smaller screens */
+      top: -10px;
+      /* Adjust for smaller screens */
+      left: 10px;
+      /* Adjust for smaller screens */
+    }
+  }
+  
+  /* Media query for medium screens (example: screens between 577px and 992px wide) */
+  @media screen and (min-width: 577px) and (max-width: 992px) {
+    #header .logo img {
+      max-height: 80px;
+      /* Adjust for medium screens */
+      top: -10px;
+      /* Adjust for medium screens */
+      left: 20px;
+      /* Adjust for medium screens */
+    }
+  }
+  
+  /* Media query for large screens (example: screens between 993px and 1200px wide) */
+  @media screen and (min-width: 993px) and (max-width: 1200px) {
+    #header .logo img {
+      max-height: 91px;
+      /* Adjust for large screens */
+      top: -10px;
+      /* Adjust for large screens */
+      left: 30px;
+      /* Adjust for large screens */
+    }
+  }
+  
+  /* Media query for extra-large screens (example: screens wider than 1200px) */
+  @media screen and (min-width: 1201px) {
+    #header .logo img {
+      height: 201px;
+      /* Your original styles for extra-large screens */
+      left: 100px;
+      /* Your original styles for extra-large screens */
+    }
+  }
+  
 
 /*--------------------------------------------------------------
   # Book a table button Menu
