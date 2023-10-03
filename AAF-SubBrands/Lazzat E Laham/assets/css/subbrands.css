@@ -1,0 +1,152 @@
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+:root {
+  --shadow-color: #221d45; /* Change the shadow color here */
+}
+
+ .card-container {
+   display: flex;
+   justify-content: space-between;
+   margin: 0 auto;
+ }
+ 
+
+ .card {
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+   background: #221d45;
+   width: 240px;
+   height: 150px;
+   padding: 3px;
+   position: relative;
+   border-radius: 6px;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   display: flex;
+   font-size: 1.5em;
+   color: rgb(88, 199, 250);
+   /* Initial text color */
+   /* Show text initially */
+   cursor: pointer;
+   font-family: cursive;
+   transition: color 1s;
+   /* Transition for text color */
+   margin: 10px;
+ }
+ 
+ .card:hover {
+   color: rgb(0, 0, 0);
+   transform: scale(1.05); /* Scale the card to make it come forward */
+  box-shadow: 0px 8px 16px var(--shadow-color); /* Add a shadow effect */
+}
+
+ .card:hover:before,
+ .card:hover:after {
+   animation:none;
+   opacity: 1;
+ }
+
+ .card::after {
+   position: absolute;
+   content: "";
+   left: 0;
+   right: 0;
+   z-index: -1;
+   height: 100%;
+   width: 100%;
+   margin: 0 auto;
+   transform: scale(0.8);
+   filter: blur(calc(24vh / 6));
+   /* You might need to adjust this value */
+   background-image: linear-gradient(var(--rotate), #0064fb,  #db3624);
+   opacity: 1;
+   transition: opacity 0.5s;
+   animation: spin 1.5s linear infinite;
+ }
+
+ .card img {
+   max-width: 100%;
+   /* Limits the image width */
+   max-height: 100%;
+   /* Limits the image height */
+   opacity: 1;
+   /* Initially hide the image with 0 opacity */
+   transition: opacity 0.5s;
+   /* Add a transition for opacity */
+ }
+
+ .card:hover img {
+   opacity: 1;
+   /* Show the image on hover with a smooth transition */
+ }
+
+ @keyframes spin {
+   0% {
+     --rotate: 0deg;
+   }
+
+   100% {
+     --rotate: 360deg;
+   }
+ }
+
+ a {
+   color: #212534;
+   text-decoration: none;
+   font-family: sans-serif;
+   font-weight: bold;
+   margin-top: 2rem;
+ }
+
+ @media screen and (max-width: 576px) {
+   .card-container {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+   }
+ }
+
+ /* Media query for medium screens (example: screens between 577px and 992px wide) */
+ @media screen and (min-width: 577px) and (max-width: 992px) {
+   .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+   }
+ }
+
+ /* Media query for large screens (example: screens between 993px and 1200px wide) */
+ @media screen and (min-width: 993px) and (max-width: 1200px) {
+   .card-container {
+     display: flex;
+   }
+ }
+
+ /* Media query for extra-large screens (example: screens wider than 1200px) */
+ @media screen and (min-width: 1201px) {
+   .card-container {
+     display: flex;
+   }
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
