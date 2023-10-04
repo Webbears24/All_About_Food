@@ -1,9 +1,13 @@
 {
-  "build": {
-    "src": "/src/views/index.hbs", 
-    "command": "npm run dev" 
-  },
-  "routes": [
-    { "src": "/(.*)", "dest": "/src/views/index.hbs" } 
-  ]
-}
+    "build": {
+      "src": "src/views/index.hbs", 
+      "command": "npm run dev"
+    },
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "src/views/index.hbs"
+      }
+    ]
+  }
+  
