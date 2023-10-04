@@ -1,6 +1,9 @@
-
 {
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/" }
-    ]
-  }
+  "build": {
+    "src": "/src/views/index.hbs", 
+    "command": "npm run dev" 
+  },
+  "routes": [
+    { "src": "/(.*)", "dest": "/path/to/your-entry-file.js" } 
+  ]
+}
