@@ -1,6 +1,6 @@
 {
     "build": {
-      "src": "src/views/index.hbs", 
+      "entrypoint": "src/views/index.hbs", 
       "command": "npm run dev"
     },
     "routes": [
