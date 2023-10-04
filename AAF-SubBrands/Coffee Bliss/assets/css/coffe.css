@@ -576,7 +576,7 @@ preloader
 
 @media (max-width: 426px){
   #hero{
-    background: url("../Images/hero\ mobile\ imgcoffee.png.png") center center;
+    background: url("../Images/header-bgcoffee.png") center center;
     background-size: cover;
     position: relative;
     padding: 80px 0;
@@ -1333,6 +1333,7 @@ section {
   }
   #hero-img{
     height: 42%;
+    filter: drop-shadow(2px 4px 6px black);
   }
   }
   @media (min-width: 333px){
