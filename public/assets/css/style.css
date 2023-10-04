@@ -601,7 +601,7 @@ preloader
 
 #hero:before {
   content: "";
-  background: rgba(0, 0, 0, 0);
+  background: rgb(0 0 0 / 55%);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -955,7 +955,7 @@ section {
     border-radius: 2%;
 }
 .about {
-  background: url("../Images/about.png") center center;
+  background: url("../Images/about-bg.jpg") center center;
   background-size: cover;
   position: relative;
   padding: 80px 0;
@@ -963,7 +963,7 @@ section {
 
 .about:before {
   content: "";
-  background: #221d45;
+  background: rgb(0 0 0 / 55%);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -1915,7 +1915,7 @@ section {
     background: #0c0b09;
     border-top: 1px solid #37332a;
     border-bottom: 1px solid #28251f;
-    padding: 10px 0px 0px 0px;
+    padding: 50px 0px 0px 0px;
   }
 
   #footer .footer-top .footer-info {
