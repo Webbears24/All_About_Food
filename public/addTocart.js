@@ -66,7 +66,7 @@ function updateCartElements() {
     totalCost += item.price;
 
     // Create a list item to display the item's name, price, and a remove button
-    cartHTML += `<li>${item.name}: ₹${item.price.toFixed(2)} <button class="remove-button" onclick="removeFromCart(${index})">Remove</button></li>`;
+    cartHTML += `<li>${item.name}: ₹${item.price.toFixed(2)} <button class="remove-button" onclick="removeFromCart(${index})">x</button></li>`;
   });
 
   // Update the cart count, total, and cart list elements in the HTML
