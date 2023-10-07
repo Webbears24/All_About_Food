@@ -519,14 +519,13 @@ preloader
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   top: 100%;
-  /* Position below the parent element */
   right: 0;
-  /* Align to the right side of the parent element */
+  border-radius: 5px;
+  padding: 10px;
 }
 
 /* Dropdown link styles */
 .dropdown-content p {
-  padding: 10px 16px;
   text-decoration: none;
   display: block;
   color: #333;
@@ -535,8 +534,7 @@ preloader
 
 /* Change link color on hover */
 .dropdown-content p:hover {
-  background-color: #db3624;
-  color: #fff;
+  color: #b04545;
 }
 
 /* Show dropdown on hover */
@@ -554,7 +552,13 @@ preloader
 }
 
 #user-dropdown:hover {
-  color: #db3624;
+  color: #b04545;
+}
+
+#user-dropdown p{
+  margin: 0;
+    font-family: cursive;
+    padding: 0px 0px 0px 5px;
 }
 
 /* Adjust the spacing and padding */
