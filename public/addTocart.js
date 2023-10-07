@@ -19,7 +19,7 @@ function addToCart(button) {
   // Append the item to the cart list with the "remove-button" class
   let cartList = document.getElementById('cart-list');
   let newItemIndex = cart.length - 1;
-  let newItemHTML = `<li>${itemName}: ₹${itemPrice.toFixed(2)} <button class="remove-button" onclick="removeFromCart(${newItemIndex})">Remove</button></li>`;
+  let newItemHTML = `<li>${itemName}: ₹${itemPrice.toFixed(2)} <button class="remove-button" onclick="removeFromCart(${newItemIndex})">x</button></li>`;
   cartList.innerHTML += newItemHTML;
 }
 

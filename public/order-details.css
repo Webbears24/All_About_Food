@@ -70,7 +70,6 @@ h2 {
 #cart-list li {
   font-size: 20px; /* Increased font size */
   color: #444;
-  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -81,6 +80,7 @@ h2 {
 
 #cart-list li:hover {
   background-color: #ebebeb; /* Lighter background color on hover */
+  border: 2px solid #0f3a72;
 }
 
 /* Style the clear cart button */
