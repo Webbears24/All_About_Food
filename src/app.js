@@ -133,10 +133,10 @@ app.get('/logout', (req, res) => {
 
 
   
-app.get("/order-details",auth,(req,res)=>{
-    res.sendFile(path.join(__dirname, "views/order-details.html"));
-    req.cookies.jwt
-});
+// app.get("/order-details",auth,(req,res)=>{
+//     res.sendFile(path.join(__dirname, "views/order-details.html"));
+//     req.cookies.jwt
+// });
 
 app.get("/lazzat",(req,res)=>{
 
@@ -160,6 +160,11 @@ app.get("/coffee",(req,res)=>{
 app.get("/chaat",(req,res)=>{
 
     res.render(path.join(__dirname,"views/chaat.hbs"))
+})
+
+app.get("/order-details",(req,res)=>{
+
+    res.render(path.join(__dirname,"views/order-details.hbs"))
 })
 
 
