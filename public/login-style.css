@@ -55,6 +55,23 @@ img{
   .form button:hover {
     background: rgb(114, 149, 255);
   }
+
+  /* Style the "Forgot Password" button */
+.form button.forgot-password {
+  background: none;
+  color: #fff;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 10px;
+  transition: color 0.2s;
+}
+
+.form button.forgot-password:hover {
+  color: #db3624; /* Change color on hover (you can customize this) */
+}
+
   
   .action {
     color: white;

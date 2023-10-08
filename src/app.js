@@ -142,7 +142,6 @@ app.get("/users/:id/verify/:token", async (req, res) => {
 
 
 
-
 app.get("/login",(req,res)=>{
     res.sendFile(path.join(__dirname, "views/login.html"));
 });
@@ -217,11 +216,98 @@ app.get('/logout', (req, res) => {
   });
 
 
+  app.get('/password-reset', (req, res) => {
+    res.sendFile(path.join(__dirname, "views/forget-password.html"));
+});
+
+//  User Request for Password Reset
+app.post('/forgot-password', async (req, res) => {
+    const email = req.body.email;
+
+    try {
+        
+
+        // Step 3: Store the Token and Expiry Time
+        const user = await Register.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const resetToken = new Token({
+            userid: user._id, // Reference to the user
+            token: crypto.randomBytes(32).toString('hex')
+        });
+        await resetToken.save();
+
+
+        // Step 4: Send a Password Reset Email
+        const resetLink = `${process.env.BASE_URL}/reset-password/${resetToken.token}`;
+        const emailText = `Click the following link to reset your password: ${resetLink}`;
+        await sendEmail(email, 'Password Reset', emailText);
+
+        return res.status(200).json({ message: 'Password reset email sent' });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+//  Verify Token and Expiry
+app.get('/reset-password/:token', async (req, res) => {
+    const token = req.params.token;
+
+    try {
+        const user = await Token.findOne({ token: token });
+        if (!user) {
+            return res.status(400).json({ message: 'Invalid or expired token' });
+        }
+
+        // Render a page for the user to reset their password
+        return res.render(path.join(__dirname,"views/reset-password.hbs"), { token });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+// Reset Password
+app.post('/reset-password/:token', async (req, res) => {
+    const resetToken = req.params.token; // Use a different variable name for clarity
+    const newPassword = req.body.newPassword;
+
+    try {
+        const tokenDocument = await Token.findOne({ token: resetToken });
+        if (!tokenDocument) {
+            return res.status(400).json({ message: 'Invalid or expired token' });
+        }
+
+        const user = await Register.findOne({ _id: tokenDocument.userid });
+
+        if (!user) {
+            return res.status(400).json({ message: 'User not found' });
+        }
+
+        // Update the user's password with the new one
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        user.password = hashedPassword;
+        await user.save();
+
+        // Delete the token after successful password reset
+        await Token.deleteOne({ userid: tokenDocument.userid });
+
+        return res.status(200).json({ message: 'Password reset successful' });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
   
-// app.get("/order-details",auth,(req,res)=>{
-//     res.sendFile(path.join(__dirname, "views/order-details.html"));
-//     req.cookies.jwt
-// });
+app.get("/order-details",auth,(req,res)=>{
+    res.sendFile(path.join(__dirname, "views/order-details.html"));
+    req.cookies.jwt
+});
 
 app.get("/lazzat",(req,res)=>{
 
@@ -247,10 +333,7 @@ app.get("/chaat",(req,res)=>{
     res.render(path.join(__dirname,"views/chaat.hbs"))
 })
 
-app.get("/order-details",(req,res)=>{
 
-    res.render(path.join(__dirname,"views/order-details.hbs"))
-})
 
 
 app.listen(port,()=>{

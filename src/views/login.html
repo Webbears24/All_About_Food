@@ -22,6 +22,8 @@
         <input type="password" name="password" placeholder="Password" />
         <button type="button" onclick="submitForm('login')">Submit</button>
         <a href="#" onclick="openRegPage()">Register</a>
+        <!-- Add a "Forgot Password" button -->
+        <button type="button" class="forgot-password" onclick="forgotPassword()">Forgot Password</button>
       </div>
       <div class="reg">
         <input type="text" name="reg-username" placeholder="Username" />
@@ -67,6 +69,10 @@
     form.submit();
         }
   }
+
+  function forgotPassword() {
+    window.location.href = '/password-reset';
+    }
     </script>
   </body>
 </html>
