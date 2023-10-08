@@ -8,6 +8,9 @@ const validator = require('validator'); // Import a validation library
 const jwt=require("jsonwebtoken")
 const cookieParser=require("cookie-parser")
 const auth=require('./middleware/auth')
+const Token=require('./models/token')
+const sendEmail=require('./middleware/verifyEmail')
+const crypto=require('crypto')
 
 
 app.set('view engine', 'hbs');
@@ -47,7 +50,6 @@ app.get("/register",(req,res)=>{
 
 app.post("/register", async (req, res) => {
     try {
-        const email=req.body.email
         // Validate user inputs
         if (!validator.isEmail(req.body.email)) {
             return res.status(400).send("Invalid email address");
@@ -60,22 +62,83 @@ app.post("/register", async (req, res) => {
             password: hashedPassword, // Store the hashed password
         });
 
-        const token=await registerUser.generateAuthToken();
+        // Generate an authentication token
+        const token = await registerUser.generateAuthToken();
 
+        // Create and save the verification token
+        const verifyToken = new Token({
+            userid: registerUser._id, // Use registerUser._id
+            token: crypto.randomBytes(32).toString('hex')
+        });
+        await verifyToken.save();
+
+        // Construct the verification URL
+        const url = `${process.env.BASE_URL}/users/${registerUser._id}/verify/${verifyToken.token}`;
+
+        // Send a verification email
+        await sendEmail(registerUser.email, "Verify Email", url);
+
+        // Set JWT cookie
         const expiryDate = new Date();
         expiryDate.setMonth(expiryDate.getMonth() + 1);
-        res.cookie("jwt",token,{
-            expires:expiryDate,
-            httpOnly:true
+        res.cookie("jwt", token, {
+            expires: expiryDate,
+            httpOnly: true
         });
 
-        const registered = await registerUser.save();
+        // Save the registered user
+        await registerUser.save();
+
+        // Redirect to the login page
         res.redirect("/login");
     } catch (e) {
         console.error(e);
         res.status(500).send("Registration failed. Please try again later.");
     }
 });
+
+
+
+app.get("/users/:id/verify/:token", async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const token = req.params.token;
+
+        // Find the user by their ID
+        const user = await Register.findById(userId);
+
+        // Check if the user exists
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+
+        // Find the verification token in the database
+        const verifyToken = await Token.findOne({ userid: userId, token: token });
+
+        // Check if the token exists and is valid
+        if (!verifyToken) {
+            return res.status(401).send("Invalid or expired token");
+        }
+
+        // Mark the user as verified
+        user.verified = true;
+        await user.save();
+
+        try {
+            await verifyToken.deleteOne();
+        } catch (error) {
+            console.error("Error removing verification token:", error);
+            // Handle the error gracefully
+        }
+
+        // Redirect or send a success message
+        res.send("Email verification successful. You can now log in.");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Verification failed. Please try again later.");
+    }
+});
+
 
 
 
@@ -90,30 +153,51 @@ app.post("/login", async (req, res) => {
     try {
         const email = req.body.username;
         const password = req.body.password;
-        
+
         // Find the user by email
         const user = await Register.findOne({ email: email });
-    
+
         if (!user) {
             return res.status(400).send('Invalid credentials'); // User not found
         }
-    
+
         // Compare the provided password with the hashed password in the database
         const passwordMatch = await bcrypt.compare(password, user.password);
-        
+
         if (passwordMatch) {
             // Passwords match, so the user is authenticated
-            
+
+            // Check if the user is verified
+            if (!user.verified) {
+                // Generate a new verification token
+                const newToken = new Token({
+                    userid: user._id,
+                    token: crypto.randomBytes(32).toString("hex"),
+                });
+
+                // Save the new token to the database
+                await newToken.save();
+
+                // Construct the verification URL with the new token
+                const url = `${process.env.BASE_URL}/users/${user._id}/verify/${newToken.token}`;
+
+                // Send a new verification email
+                await sendEmail(user.email, "Resend Verification Email", url);
+
+                return res.status(401).send('Email not verified. A new verification link has been sent to your email.');
+            }
+
             // Generate a JWT token
             const token = await user.generateAuthToken();
             const expiryDate = new Date();
             expiryDate.setMonth(expiryDate.getMonth() + 1);
-            
+
             // Set the JWT token as a cookie
             res.cookie("jwt", token, {
                 expires: expiryDate,
                 httpOnly: true
             });
+
             // Pass the user information to the template
             res.render('index', { user: user });
         } else {
@@ -125,6 +209,7 @@ app.post("/login", async (req, res) => {
         res.status(500).send('Server error');
     }
 });
+
 
 app.get('/logout', (req, res) => {
     res.clearCookie('jwt'); // Clear the JWT cookie or session

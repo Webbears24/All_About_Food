@@ -1,6 +1,7 @@
 require('dotenv').config();
 const mongoose= require("mongoose");
 const jwt=require("jsonwebtoken")
+const Token=require("./token")
 
 
 const userSchema=new mongoose.Schema({
@@ -16,6 +17,10 @@ const userSchema=new mongoose.Schema({
     password:{
         type:String,
         required:true
+    },
+    verified:{
+        type:Boolean,
+        default:false
     },
     tokens:[{
         token:{
