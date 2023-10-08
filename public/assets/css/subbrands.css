@@ -11,6 +11,7 @@
    display: flex;
    justify-content: space-between;
    margin: 0 auto;
+   filter: drop-shadow(2px 12px 14px black);
  }
  
 
@@ -35,6 +36,7 @@
    transition: color 1s;
    /* Transition for text color */
    margin: 10px;
+   transition: all ease 0.5s;
  }
  
  .card:hover {

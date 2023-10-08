@@ -52,7 +52,7 @@
           <div id="preloader">
             <div class="jumper">
                 <img src="assets/Images/Dombivli Chaat Centre-png.png" alt="logo"
-                    style="height: 190px; position: absolute; top: -48px; left: -50px;">
+                    style="height: 190px; position: absolute; top: -48px; left: -68px;">
             </div>
         </div>
         <!--  Preloader End  -->
@@ -90,9 +90,15 @@
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#menu">Menu</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          
-
+          <li class="dropdown"><a href="#"><span>SubBrands</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="/lazzat">Lazzat E Laham</a></li>
+              <li><a href="/vegmahal">Veg Mahal</a></li>
+              <li><a href="/meetha">Kuch Meetha Hojay</a></li>
+              <li><a href="/coffee">Coffee Bliss</a></li>
+              <li><a href="/chaat">Dombivali Chaat</a></li>
+            </ul>
+          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
@@ -101,7 +107,7 @@
        {{#if user}}
           <!-- Display username and dropdown when user is logged in -->
           <div class="dropdown">
-            <a class="nav-link scrollto" href="#" id="user-dropdown">
+            <a class="nav-link scrollto" href="#" id="user-dropdown" style="margin: 0;">
               <i class="fa-regular fa-user"> {{user.username}}</i>
             </a>
             <div class="dropdown-content" id="user-dropdown-content">
@@ -111,7 +117,7 @@
           </div>
         {{else}}
           <!-- Display login icon and link when user is not logged in -->
-          <a class="nav-link scrollto" href="/login"><i class="fa-regular fa-user"></i></a>
+          <a class="nav-link scrollto" href="/login"  style="margin: 0;"><i class="fa-regular fa-user"></i></a>
         {{/if}}
         <!-- Other navigation links and cart icon -->
         <div class="nav-link scrollto">
@@ -131,7 +137,7 @@
       <div class="row">
         <div class="col-lg-8" style="position: relative; width: 100%; text-align: center; top: 50px;">
           <!-- <h1 style=" font-family: Sofia, sans-serif;"><span>Lazzat E Laham</span></h1> -->
-          <img src="assets/Images/hero log.png" alt="Dombivli_chaat" id="hero-img">
+          <img src="assets/Images/hero logchaat.png" alt="Dombivli_chaat" id="hero-img">
           <h2>Delicious food, click to order!</h2>
 
           <div class="btns">
@@ -164,18 +170,19 @@
             </div>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-            <h3>Welcome to Lazzat E Laham</h3>
-            <p class="fst-italic">where culinary exploration meets heartfelt passion. We
-              believe that food is not merely sustenance; it's an art form that brings people together, creates
-              memories, and tells stories. Our journey begins with a simple yet profound idea - to celebrate the diverse
-              world of flavors under one roof.
+            <h3>Dombivali Chaat Corner🌶️🥵</h3>
+            <p class="fst-italic">Get ready for a burst of flavors with every bite of this popular Indian street food.
+               From tangy tamarind chutney to spicy masala, chaat is a delightful combination of sweet, sour, and savory tastes. 
+               Indulge in crispy samosas, crunchy papdi, and refreshing yogurt, all topped with a colorful array of garnishes. 
+               Chaat is a true explosion of flavors that will leave your taste buds dancing with joy!
+
             </p>
             <ul>
-              <li><i class="bi bi-check-circle"></i> Lazzate Laham - Unleash Your Carnivorous Cravings</li>
-              <li><i class="bi bi-check-circle"></i> Veg Mahal - Where Vegetarian Elegance Reigns</li>
-              <li><i class="bi bi-check-circle"></i> Coffee Bliss - Awaken Your Senses, One Sip at a Time</li>
-              <li><i class="bi bi-check-circle"></i> As Kuch Meetha Ho Jaye - Indulge in Sweet Moments, Every Day</li>
-              <li><i class="bi bi-check-circle"></i> Dombivali Chaat- Savor Spicy Delights, One Bite at a Time</li>
+              <li><i class="bi bi-check-circle"></i> Ready for a burst of flavors with every mouthwatering bite of chaat.</li>
+              <li><i class="bi bi-check-circle"></i> Indulge in the ultimate street food experience with this beloved Indian delight.</li>
+              <li><i class="bi bi-check-circle"></i> Textural Delight: Enjoy the crispy and crunchy textures of samosas, papdi, and more.</li>
+              <li><i class="bi bi-check-circle"></i> Experience the perfect balance of tangy tamarind chutney and refreshing yogurt</li>
+              <li><i class="bi bi-check-circle"></i> Top off your chaat with a colorful array of garnishes for an Instagram-worthy treat. 🌶🥔🍅🥒!</li>
             </ul>
             <!-- <p>
               Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
@@ -463,7 +470,7 @@
 
           <div class="col-lg-3 col-md-6" style="text-align: center;">
             <div class="footer-info">
-              <a href="file:///d%3A/Projects/All_about_food/index.html" class="logo me-auto me-lg-0"><img src="assets/Images/all about food-png.png" alt=""
+              <a href="/" class="logo me-auto me-lg-0"><img src="assets/Images/all about food-png.png" alt=""
                   class="img-fluid"></a>
             </div>
           </div>

@@ -52,8 +52,8 @@
             <!--  Preloader Start  -->
             <div id="preloader">
               <div class="jumper">
-                  <img src="/assets/Images/all about food-png.png" alt="logo"
-                      style="height: 190px; position: absolute; top: -48px; left: -50px;">
+                  <img src="./assets/Images/AAF-Pre.png" alt="logo"
+                      style="height: 190px; position: absolute; top: -48px; left: -68px;">
               </div>
           </div>
           <!--  Preloader End  -->
@@ -77,7 +77,7 @@
 
 
       
-      <a href="index.html" class="logo me-auto me-lg-0"><img src="/assets/Images/all about food-png.png" alt=""
+      <a href="/" class="logo me-auto me-lg-0"><img src="/assets/Images/all about food-png.png" alt=""
           class="img-fluid"></a>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
@@ -89,18 +89,26 @@
           <li><a class="nav-link scrollto" href="#chefs">Chefs</a></li>
           <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          
-
+          <li class="dropdown"><a href="#"><span>SubBrands</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="/lazzat">Lazzat E Laham</a></li>
+              <li><a href="/vegmahal">Veg Mahal</a></li>
+              <li><a href="/meetha">Kuch Meetha Hojay</a></li>
+              <li><a href="/coffee">Coffee Bliss</a></li>
+              <li><a href="/chaat">Dombivali Chaat</a></li>
+            </ul>
+          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
+
       
       <div class="side-nav">
        {{#if user}}
           <!-- Display username and dropdown when user is logged in -->
           <div class="dropdown">
-            <a class="nav-link scrollto" href="#" id="user-dropdown">
-              <i class="fa-regular fa-user"> {{user.username}}</i>
+            <a class="nav-link scrollto" href="#" id="user-dropdown" style="margin: 0;">
+              <i class="fa-regular fa-user"> </i><p>{{user.username}}</p>
             </a>
             <div class="dropdown-content" id="user-dropdown-content">
               <p>Email: {{user.email}}</p>
@@ -109,7 +117,7 @@
           </div>
         {{else}}
           <!-- Display login icon and link when user is not logged in -->
-          <a class="nav-link scrollto" href="/login"><i class="fa-regular fa-user"></i></a>
+          <a class="nav-link scrollto" href="/login"  style="margin: 0;"><i class="fa-regular fa-user"></i></a>
         {{/if}}
         <!-- Other navigation links and cart icon -->
         <div class="nav-link scrollto">
@@ -128,7 +136,9 @@
     <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
       <div class="row">
         <div class="col-lg-8">
-          <h1 style=" font-family: Sofia, sans-serif;">Welcome to <span>Your One-Stop Destination</span></h1>
+          <h3 >"Exploring Taste, One Bite at a Time"</h3>
+          <h1>Welcome to <span>Your One-Stop Destination</span></h1>
+          <p>"Where Taste Meets Hospitality"</p>
           <!-- <h2>Delivering great food for more than 18 years!</h2> -->
 
           <div class="btns">
@@ -138,7 +148,7 @@
         </div>
         <div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in"
           data-aos-delay="200">
-          <a href="https://www.youtube.com/watch?v=GlrxcuEDyF8" class="glightbox play-btn"></a>
+          <a href="https://www.youtube.com" class="glightbox play-btn"></a>
         </div>
 
       </div>
@@ -154,7 +164,7 @@
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
             <div class="about-img">
-              <img src="/assets/img/about.png" alt="">
+              <img src="assets/img/about.png" alt="">
             </div>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
@@ -172,10 +182,7 @@
               <li><i class="bi bi-check-circle"></i> Dombivali Chaat- Savor Spicy Delights, One Bite at a Time</li>
             </ul>
             <!-- <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-              voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum
+           just checking Some checks were not successful in git hub
             </p> -->
           </div>
         </div>
@@ -887,7 +894,7 @@
 
           <div class="col-lg-3 col-md-6" style="text-align: center;">
             <div class="footer-info">
-              <a href="index.html" class="logo me-auto me-lg-0"><img src="/assets/Images/all about food-png.png" alt=""
+              <a href="/" class="logo me-auto me-lg-0"><img src="/assets/Images/all about food-png.png" alt=""
                 class="img-fluid"></a>
             </div>
           </div>
