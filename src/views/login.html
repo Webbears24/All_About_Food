@@ -1,78 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="login-style.css" />
-    <title>Login-All About Food</title>
-  </head>
-  <body>
-    <form action="/" class="form" id="myForm" method="post">
-      <div class="action">
-        <span class="load show" id="login-action" onclick="openLoginPage()"
-          >Login</span
-        >
-       <span class="load" onclick="openRegPage()" id="reg-action"
-          >Register</span
-        >
-      </div>
-      <div class="login show-page">
-        <input type="text" name="username" placeholder="Username" />
-        <input type="password" name="password" placeholder="Password" />
-        <button type="button" onclick="submitForm('login')">Submit</button>
-        <a href="#" onclick="openRegPage()">Register</a>
-        <!-- Add a "Forgot Password" button -->
-        <button type="button" class="forgot-password" onclick="forgotPassword()">Forgot Password</button>
-      </div>
-      <div class="reg">
-        <input type="text" name="reg-username" placeholder="Username" />
-        <input type="email" name="email" placeholder="Email" />
-        <input type="password" name="reg-password" placeholder="Password" />
-        <button type="button" onclick="submitForm('register')">Submit</button>
-        <a href="#" onclick="openLoginPage()">Login</a>
-      </div>
-    </form>
 
-    <script>
-      function openLoginPage() {
-        document.querySelector(".reg").classList.remove("show-page");
-        document.querySelector(".login").classList.add("show-page");
-        document.getElementById("login-action").classList.add("show");
-        document.getElementById("reg-action").classList.remove("show");
-      }
-      function openRegPage() {
-        document.querySelector(".reg").classList.add("show-page");
-        document.querySelector(".login").classList.remove("show-page");
-        document.getElementById("reg-action").classList.add("show");
-        document.getElementById("login-action").classList.remove("show");
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="login-style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.32/sweetalert2.min.css"
+    integrity="sha512-IScV5kvJo+TIPbxENerxZcEpu9VrLUGh1qYWv6Z9aylhxWE4k4Fch3CHl0IYYmN+jrnWQBPlpoTVoWfSMakoKA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Login-All About Food</title>
+</head>
 
-      function setAction(action) {
-        const form = document.getElementById("myForm");
-        if (action === "login") {
-          form.action = "/login";
-        } else if (action === "register") {
-          form.action = "/register";
-        }
-      }
+<body>
+  <form action="/" class="form" id="myForm" method="post">
+    <div class="action">
+      <span class="load show" id="login-action" onclick="openLoginPage()">Login</span>
+      <span class="load" onclick="openRegPage()" id="reg-action">Register</span>
+    </div>
+    <div class="login show-page">
+      <input type="text" name="username" placeholder="Username" />
+      <input type="password" name="password" placeholder="Password" />
+      <button type="button" onclick="submitForm('login')">Submit</button>
+      <a href="#" onclick="openRegPage()">Register</a>
+      <!-- Add a "Forgot Password" button -->
+      <button type="button" class="forgot-password" onclick="forgotPassword()">Forgot Password</button>
+    </div>
+    <div class="reg">
+      <input type="text" name="reg-username" placeholder="Username" />
+      <input type="email" name="email" placeholder="Email" />
+      <input type="password" name="reg-password" placeholder="Password" />
+      <button type="button" onclick="submitForm('register')">Submit</button>
+      <a href="#" onclick="openLoginPage()">Login</a>
+    </div>
+  </form>
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.32/sweetalert2.all.min.js"
+    integrity="sha512-zB7yJLSASiSevQmWCrQaq+z/f5zRIa884hwWgmK1oI3MfolIzKcpDtyfBsrGqUi/hMCObVwr/+SZTByOqh0zkQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-      function submitForm(formButton) {
-        if(formButton=='register'){
-          setAction('register')
-    const form = document.getElementById("myForm");
-    form.submit();
-        }
-        else if(formButton=='login'){
-          setAction('login')
-    const form = document.getElementById("myForm");
-    form.submit();
-        }
-  }
-
-  function forgotPassword() {
-    window.location.href = '/password-reset';
+  <script>
+    function openLoginPage() {
+      document.querySelector(".reg").classList.remove("show-page");
+      document.querySelector(".login").classList.add("show-page");
+      document.getElementById("login-action").classList.add("show");
+      document.getElementById("reg-action").classList.remove("show");
     }
-    </script>
-  </body>
+    function openRegPage() {
+      document.querySelector(".reg").classList.add("show-page");
+      document.querySelector(".login").classList.remove("show-page");
+      document.getElementById("reg-action").classList.add("show");
+      document.getElementById("login-action").classList.remove("show");
+    }
+
+    function setAction(action) {
+      const form = document.getElementById("myForm");
+      if (action === "login") {
+        form.action = "/login";
+      } else if (action === "register") {
+        form.action = "/register";
+      }
+    }
+
+    function submitForm(formButton) {
+      if (formButton == 'register') {
+        setAction('register')
+        const form = document.getElementById("myForm");
+        form.submit();
+      }
+      else if (formButton == 'login') {
+        setAction('login')
+        const form = document.getElementById("myForm");
+        form.submit();
+      }
+    }
+
+    function forgotPassword() {
+      window.location.href = '/password-reset';
+    }
+    // Check for the 'success' query parameter in the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("success")) {
+      Swal.fire({
+        title: 'Registration Successful!',
+        text: 'Please verify your email for log in',
+        icon: 'success',
+        confirmButtonColor: '#007BFF',
+        confirmButtonText: 'OK'
+      });
+    }
+    if (urlParams.has("RegistrationError")) {
+      // Get the error message from the query parameter
+      const errorMessage = urlParams.get("RegistrationError");
+
+      // Show a SweetAlert2 error pop-up
+      Swal.fire({
+        title: 'Registration Error',
+        text: errorMessage,
+        icon: 'error',
+        confirmButtonColor: '#dc3545',
+        confirmButtonText: 'OK'
+      });
+    }
+    if (urlParams.has("ResetEmail")) {
+      // Get the error message from the query parameter
+      const errorMessage = urlParams.get("ResetEmail");
+
+      // Show a SweetAlert2 error pop-up
+      Swal.fire({
+        title: 'Reset Email',
+        text: errorMessage,
+        icon: 'success',
+        confirmButtonColor: '#dc3545',
+        confirmButtonText: 'OK'
+      });
+    }
+    if (urlParams.has("ResetEmailError")) {
+      // Get the error message from the query parameter
+      const errorMessage = urlParams.get("ResetEmailError");
+
+      // Show a SweetAlert2 error pop-up
+      Swal.fire({
+        title: 'Reset Email',
+        text: errorMessage,
+        icon: 'error',
+        confirmButtonColor: '#dc3545',
+        confirmButtonText: 'OK'
+      });
+    }
+    if (urlParams.has("ResetEmailSuccess")) {
+      // Get the error message from the query parameter
+      const errorMessage = urlParams.get("ResetEmailSuccess");
+
+      // Show a SweetAlert2 error pop-up
+      Swal.fire({
+        title: 'Reset Email',
+        text: errorMessage,
+        icon: 'error',
+        confirmButtonColor: '#dc3545',
+        confirmButtonText: 'OK'
+      });
+    }
+    if (urlParams.has("VerificationError")) {
+      // Get the error message from the query parameter
+      const errorMessage = urlParams.get("VerificationError");
+
+      // Show a SweetAlert2 error pop-up
+      Swal.fire({
+        title: 'Verification Error',
+        text: errorMessage,
+        icon: 'error',
+        confirmButtonColor: '#dc3545',
+        confirmButtonText: 'OK'
+      });
+    }
+
+   
+
+    if (urlParams.has("LoginError")) {
+      const errorMessage = urlParams.get("LoginError");
+
+      // Show a SweetAlert2 error pop-up
+      Swal.fire({
+        title: 'Login Error',
+        text: errorMessage,
+        icon: 'success',
+        confirmButtonColor: '#dc3545',
+        confirmButtonText: 'OK'
+      });
+    }
+
+  </script>
+</body>
+
 </html>

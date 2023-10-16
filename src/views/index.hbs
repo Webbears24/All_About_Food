@@ -35,6 +35,12 @@
   <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.32/sweetalert2.min.css"
+    integrity="sha512-IScV5kvJo+TIPbxENerxZcEpu9VrLUGh1qYWv6Z9aylhxWE4k4Fch3CHl0IYYmN+jrnWQBPlpoTVoWfSMakoKA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.32/sweetalert2.all.min.js"
+    integrity="sha512-zB7yJLSASiSevQmWCrQaq+z/f5zRIa884hwWgmK1oI3MfolIzKcpDtyfBsrGqUi/hMCObVwr/+SZTByOqh0zkQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">
@@ -936,6 +942,7 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
+      
 
   <!-- Vendor JS Files -->
   <script src="/assets/vendor/aos/aos.js"></script>
@@ -945,11 +952,30 @@
   <script src="/assets/vendor/php-email-form/validate.js"></script>
   <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
 
+
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
   <script src="addTocart.js"></script>
   <script src="contactform.js"></script>
   <script src="Booktable.js"></script>
+<script>
+      const urlParams = new URLSearchParams(window.location.search);
+
+   if (urlParams.has("LoginSuccess")) {
+      // Get the error message from the query parameter
+      const errorMessage = urlParams.get("LoginSuccess");
+
+      // Show a SweetAlert2 error pop-up
+      Swal.fire({
+        title: 'Logged in',
+        text: errorMessage,
+        icon: 'success',
+        confirmButtonColor: '#dc3545',
+        confirmButtonText: 'OK'
+      });
+    }
+</script>
+  
 
  
 </body>

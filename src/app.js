@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname,'../AAF-SubBrands/Coffee Bliss')))
 
 
 app.get("/",(req,res)=>{
-    res.render(path.join(__dirname, "views/index"));
+    res.render(path.join(__dirname, "views/index.hbs"));
 });
 
 app.get("/register",(req,res)=>{
@@ -52,7 +52,7 @@ app.post("/register", async (req, res) => {
     try {
         // Validate user inputs
         if (!validator.isEmail(req.body.email)) {
-            return res.status(400).send("Invalid email address");
+            res.redirect("/login?RegistrationError=Invalid Email Address");
         }
         // Hash the password before storing it
         const hashedPassword = await bcrypt.hash(req.body['reg-password'], 10); // 10 is the number of salt rounds
@@ -90,10 +90,9 @@ app.post("/register", async (req, res) => {
         await registerUser.save();
 
         // Redirect to the login page
-        res.redirect("/login");
+        res.redirect("/login?success=true");
     } catch (e) {
-        console.error(e);
-        res.status(500).send("Registration failed. Please try again later.");
+        res.redirect("/login?RegistrationError=Please try again later");
     }
 });
 
@@ -117,19 +116,15 @@ app.get("/users/:id/verify/:token", async (req, res) => {
 
         // Check if the token exists and is valid
         if (!verifyToken) {
-            return res.status(401).send("Invalid or expired token");
+            res.redirect("Invalid Or Expired Token");
         }
 
         // Mark the user as verified
         user.verified = true;
         await user.save();
 
-        try {
             await verifyToken.deleteOne();
-        } catch (error) {
-            console.error("Error removing verification token:", error);
-            // Handle the error gracefully
-        }
+        
 
         // Redirect or send a success message
         res.send("Email verification successful. You can now log in.");
@@ -157,9 +152,9 @@ app.post("/login", async (req, res) => {
         const user = await Register.findOne({ email: email });
 
         if (!user) {
-            return res.status(400).send('Invalid credentials'); // User not found
+            res.redirect("/login?LoginError=User not found Please Register First") // User not found
         }
-
+        if(user){
         // Compare the provided password with the hashed password in the database
         const passwordMatch = await bcrypt.compare(password, user.password);
 
@@ -183,7 +178,7 @@ app.post("/login", async (req, res) => {
                 // Send a new verification email
                 await sendEmail(user.email, "Resend Verification Email", url);
 
-                return res.status(401).send('Email not verified. A new verification link has been sent to your email.');
+                res.redirect("/login?VerificationError=Email not verified. A new verification link has been sent to your email.");
             }
 
             // Generate a JWT token
@@ -198,14 +193,13 @@ app.post("/login", async (req, res) => {
             });
 
             // Pass the user information to the template
-            res.render('index', { user: user });
+            res.redirect('/?LoginSuccess=Logged In', { user: user });
         } else {
-            // Passwords do not match
-            return res.status(400).send('Invalid credentials');
+            res.redirect("/login?LoginError=Invalid credentials")
         }
+    }
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Server error');
+        res.redirect("/login?LoginError=Server Down Please Try again later")
     }
 });
 
@@ -230,7 +224,7 @@ app.post('/forgot-password', async (req, res) => {
         // Step 3: Store the Token and Expiry Time
         const user = await Register.findOne({ email });
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            res.redirect("/login?RegistrationError=No user found Please Register first");
         }
 
         const resetToken = new Token({
@@ -245,10 +239,9 @@ app.post('/forgot-password', async (req, res) => {
         const emailText = `Click the following link to reset your password: ${resetLink}`;
         await sendEmail(email, 'Password Reset', emailText);
 
-        return res.status(200).json({ message: 'Password reset email sent' });
+        res.redirect("/login?ResetEmail=Password Reset Email Sent ");
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: 'Internal server error' });
+        res.redirect("/login?ResetEmailError=Server Error");
     }
 });
 
@@ -265,8 +258,7 @@ app.get('/reset-password/:token', async (req, res) => {
         // Render a page for the user to reset their password
         return res.render(path.join(__dirname,"views/reset-password.hbs"), { token });
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: 'Internal server error' });
+        res.redirect("/login?ResetEmailError=Server Error");
     }
 });
 
@@ -284,7 +276,7 @@ app.post('/reset-password/:token', async (req, res) => {
         const user = await Register.findOne({ _id: tokenDocument.userid });
 
         if (!user) {
-            return res.status(400).json({ message: 'User not found' });
+            res.redirect("/login?RegistrationError=No user found Please Register first");
         }
 
         // Update the user's password with the new one
@@ -295,17 +287,17 @@ app.post('/reset-password/:token', async (req, res) => {
         // Delete the token after successful password reset
         await Token.deleteOne({ userid: tokenDocument.userid });
 
-        return res.status(200).json({ message: 'Password reset successful' });
+        res.redirect("/login?ResetEmailSuccess=Password Changed Successfully");
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: 'Internal server error' });
+        res.redirect("/login?ResetEmailError=Server Error");
     }
 });
 
 
   
 app.get("/order-details",auth,(req,res)=>{
-    res.sendFile(path.join(__dirname, "views/order-details.html"));
+    res.render(path.join(__dirname, "views/order-details.hbs"));
     req.cookies.jwt
 });
 
