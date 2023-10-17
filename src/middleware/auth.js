@@ -10,7 +10,7 @@ const auth=async(req,res,next)=>{
         next();
 
     } catch (error) {
-        res.status(401).send("PLEASE LOG IN")
+        res.redirect("/login?LoginError=Please Log in To continue")
     }
 }
 
