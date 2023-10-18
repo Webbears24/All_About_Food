@@ -193,7 +193,7 @@ app.post("/login", async (req, res) => {
             });
 
             // Pass the user information to the template
-            res.redirect('/?LoginSuccess=Logged In', { user: user });
+            res.render('index.hbs', { user: user });
         } else {
             res.redirect("/login?LoginError=Invalid credentials")
         }
