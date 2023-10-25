@@ -1876,8 +1876,8 @@ section {
   }
 
   .contact .php-email-form button[type="submit"] {
-    background: #db3624;
-    border: 0;
+    border: 2px solid #db3624;
+    background:  #221d45;
     padding: 10px 35px;
     color: #fff;
     transition: 0.4s;
@@ -1885,8 +1885,8 @@ section {
   }
 
   .contact .php-email-form button[type="submit"]:hover {
-    background: #09af3b;
-    color: #221d45;
+    background: #db3624;
+    color: #ffffff;
   }
 
   /* map */
